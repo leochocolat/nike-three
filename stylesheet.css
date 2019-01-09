@@ -3,3 +3,11 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
 }
+
+.product-box {
+  width: 300px;
+  height: 350px;
+  display: inline-block;
+  margin: 20px;
+  border: solid 1px red;
+}
