@@ -74,9 +74,17 @@ function myLoader() {
 
       rotation();
       function rotation() {
+        // mesh.rotation.z -= rotationSpeed;
+        // mesh.rotation.x -= rotationSpeed;
         mesh.rotation.y -= rotationSpeed;
 
-        
+        gltf.scene.traverse( function ( node ) {
+           if ( node.isMesh ) {
+             var colors = [new THREE.Color(0x07E1A0), new THREE.Color(0x240CE8), new THREE.Color(0x720227), new THREE.Color(0xffffff)];
+             node.material.color = colors[parseInt(Math.random() * 4)];
+             node.material.wireframe = false;
+           }
+        });
 
         renderer.render(scene, camera);
         controls.update();
@@ -84,11 +92,11 @@ function myLoader() {
         requestAnimationFrame(rotation);
       };
 
-      // gltf.scene.traverse( function ( node ) {
-      //    if ( node.isMesh ) {
-      //      node.material.wireframe = true;
-      //    }
-      // });
+      gltf.scene.traverse( function ( node ) {
+         if ( node.isMesh ) {
+           node.material.wireframe = true;
+         }
+      });
 
       // var Handler = function() {
       //    this.clickHandler = function() {
