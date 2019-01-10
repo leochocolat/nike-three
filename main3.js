@@ -82,11 +82,11 @@ function myLoader() {
         requestAnimationFrame(rotation);
       };
 
-      gltf.scene.traverse( function ( node ) {
-         if ( node.isMesh ) {
-           node.material.wireframe = true;
-         }
-      });
+      // gltf.scene.traverse( function ( node ) {
+      //    if ( node.isMesh ) {
+      //      node.material.wireframe = true;
+      //    }
+      // });
 
       // var Handler = function() {
       //    this.clickHandler = function() {
