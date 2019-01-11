@@ -74,9 +74,9 @@ function myLoader() {
 
       rotation();
       function rotation() {
-        // mesh.rotation.z -= rotationSpeed;
-        // mesh.rotation.x -= rotationSpeed;
-        // mesh.rotation.y -= rotationSpeed;
+        mesh.rotation.z -= rotationSpeed;
+        mesh.rotation.x -= rotationSpeed;
+        mesh.rotation.y -= rotationSpeed;
 
         renderer.render(scene, camera);
         controls.update();
