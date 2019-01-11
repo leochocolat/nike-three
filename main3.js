@@ -57,8 +57,9 @@ function myLoader() {
 
   var rotationSpeed;
   var myModel = 'nikeGltf.gltf';
+  var path = 'models/';
 
-  var loader = new THREE.GLTFLoader().setPath('models/');
+  var loader = new THREE.GLTFLoader().setPath(path);
   loader.load(myModel, function(gltf) {
     var mesh = gltf.scene;
 

@@ -72,11 +72,12 @@ function myLoader() {
 
       rotationSpeed = .02;
 
+      var sign = [-1, 1];
+      var randomSign = parseInt(Math.random() * 2);
+
       rotation();
       function rotation() {
         mesh.rotation.y -= rotationSpeed;
-
-        
 
         renderer.render(scene, camera);
         controls.update();
@@ -84,57 +85,57 @@ function myLoader() {
         requestAnimationFrame(rotation);
       };
 
-      // gltf.scene.traverse( function ( node ) {
-      //    if ( node.isMesh ) {
-      //      node.material.wireframe = true;
-      //    }
-      // });
+      var Handler = function() {
+         this.clickHandler = function() {
+            var self = this;
+            this.timerId = setTimeout(function() {
+              gltf.scene.traverse( function ( node ) {
+                 if ( node.isMesh ) {
+                   node.material.wireframe = true;
+                   console.log(node)
+                 }
+              });
 
-      // var Handler = function() {
-      //    this.clickHandler = function() {
-      //       var self = this;
-      //       this.timerId = setTimeout(function() {
-      //           gltf.scene.traverse( function ( node ) {
-      //              if ( node.isMesh ) {
-      //                node.material.wireframe = true;
-      //              }
-      //           });
-      //
-      //           // ACCELERATION
-      //           rotationSpeed += .4;
-      //
-      //
-      //       },1);
-      //
-      //       this.timerId = setTimeout(function() {
-      //           gltf.scene.traverse( function ( node ) {
-      //              if ( node.isMesh ) {
-      //                var colors = [new THREE.Color(0x07E1A0), new THREE.Color(0x240CE8), new THREE.Color(0x720227), new THREE.Color(0xffffff)];
-      //                node.material.color = colors[parseInt(Math.random() * 4)];
-      //                node.material.wireframe = false;
-      //              }
-      //           });
-      //           rotationSpeed = .02;
-      //       },1000);
-      //
-      //    };
-      //
-      //    this.cancelHandler = function() {
-      //        if (this.timerId) {
-      //            clearTimeout(this.timerId);
-      //            gltf.scene.traverse( function ( node ) {
-      //     	        if ( node.isMesh ) {
-      //                 node.material.wireframe = false;
-      //               }
-      //       	   });
-      //           rotationSpeed = .02;
-      //        }
-      //    }
-      //
-      // }
-      // var h = new Handler();
-      // addEventListener('mousedown', h.clickHandler.bind(h));
-      // addEventListener('mouseup', h.cancelHandler.bind(h));
+                // ACCELERATION
+                rotationSpeed += .4;
+
+
+            },1);
+
+            this.timerId = setTimeout(function() {
+                gltf.scene.traverse( function ( node ) {
+                   if ( node.isMesh ) {
+                     var colors = [new THREE.Color(0x07E1A0), new THREE.Color(0x240CE8), new THREE.Color(0x720227), new THREE.Color(0xffffff)];
+                     node.material.color = colors[parseInt(Math.random() * 4)];
+                     node.material.wireframe = false;
+                     console.log(node);
+                     randomZ = Math.random() * 100;
+                     // node.position.z = Math.random() * 100;
+                     // node.position.x = Math.random() * 100;
+                     // node.position.y = Math.random() * 100;
+                   }
+                });
+                rotationSpeed = .02;
+            },1000);
+
+         };
+
+         this.cancelHandler = function() {
+             if (this.timerId) {
+                 clearTimeout(this.timerId);
+                 gltf.scene.traverse( function ( node ) {
+          	        if ( node.isMesh ) {
+                      node.material.wireframe = false;
+                    }
+            	   });
+                rotationSpeed = .02;
+             }
+         }
+
+      }
+      var h = new Handler();
+      addEventListener('mousedown', h.clickHandler.bind(h));
+      addEventListener('mouseup', h.cancelHandler.bind(h));
     }
 
 	});
